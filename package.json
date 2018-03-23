@@ -1,0 +1,36 @@
+
+{
+  "name": "react-native-secure-storage",
+  "title": "React Native Secure Storage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oyyq99999/react-native-secure-storage.git",
+    "baseUrl": "https://github.com/oyyq99999/react-native-secure-storage"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Yunqi Ouyang",
+    "email": "oyyq9999999@163.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    
+    "react": "16.0.0-alpha.6",
+    "react-native": "^0.44.1"
+  },
+  "devDependencies": {
+    
+    "react": "16.0.0-alpha.6",
+    "react-native": "^0.44.1" 
+  }
+}
