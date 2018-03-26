@@ -127,6 +127,16 @@ NSString *accessGroupValue(NSDictionary *options)
 
 #define kAuthenticationPromptMessage @"authenticationPrompt"
 
+LAPolicy authPolicy(NSDictionary *options)
+{
+    if (options && options[kAuthenticationType]) {
+        if ([ options[kAuthenticationType] isEqualToString:kAuthenticationTypeBiometrics ]) {
+            return LAPolicyDeviceOwnerAuthenticationWithBiometrics;
+        }
+    }
+    return LAPolicyDeviceOwnerAuthentication;
+}
+
 SecAccessControlCreateFlags accessControlValue(NSDictionary *options)
 {
     if (options && options[kAccessControlType] && [options[kAccessControlType] isKindOfClass:[NSString class]]) {
@@ -248,6 +258,38 @@ RCT_EXPORT_METHOD(getAllKeys:(NSDictionary *)options resolver:(RCTPromiseResolve
         }
     }
     return resolve(finalResult);
+}
+
+RCT_EXPORT_METHOD(canCheckAuthentication:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+    LAPolicy policyToEvaluate = authPolicy(options);
+    
+    NSError *aerr = nil;
+    BOOL canBeProtected = [[LAContext new] canEvaluatePolicy:policyToEvaluate error:&aerr];
+    
+    if (aerr || !canBeProtected) {
+        return resolve(@(NO));
+    } else {
+        return resolve(@(YES));
+    }
+}
+
+RCT_EXPORT_METHOD(getSupportedBiometryType:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+    NSError *aerr = nil;
+    LAContext *context = [LAContext new];
+    BOOL canBeProtected = [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&aerr];
+    
+    if (!aerr && canBeProtected) {
+        if (@available(iOS 11, *)) {
+            if (context.biometryType == LABiometryTypeFaceID) {
+                return resolve(kBiometryTypeFaceID);
+            }
+        }
+        return resolve(kBiometryTypeTouchID);
+    }
+    
+    return resolve([NSNull null]);
 }
 
 - (OSStatus)deleteItemForKey:(NSString *)key inService:(NSString *)service

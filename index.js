@@ -24,4 +24,15 @@ export const ACCESS_CONTROL = {
   BIOMETRY_CURRENT_SET_OR_DEVICE_PASSCODE: 'BiometryCurrentSetOrDevicePasscode',
 };
 
+export const AUTHENTICATION_TYPE = {
+  DEVICE_PASSCODE_OR_BIOMETRICS: 'AuthenticationWithBiometricsDevicePasscode',
+  BIOMETRICS: 'AuthenticationWithBiometrics',
+};
+
+export const BIOMETRY_TYPE = {
+  TOUCH_ID: 'TouchID',
+  FACE_ID: 'FaceID',
+  FINGERPRINT: 'Fingerprint',
+};
+
 export default RNSecureStorage;
