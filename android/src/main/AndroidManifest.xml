@@ -1,6 +1,6 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="li.yunqi">
-
+          package="li.yunqi.rnsecurestorage">
+    <uses-permission  android:name="android.permission.USE_FINGERPRINT" />
 </manifest>
   

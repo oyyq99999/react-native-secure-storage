@@ -41,6 +41,7 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
+    compile 'com.facebook.conceal:conceal:1.1.3@aar'
 }
 
 def configureReactNativePom(def pom) {
@@ -50,7 +51,7 @@ def configureReactNativePom(def pom) {
         name packageJson.title
         artifactId packageJson.name
         version = packageJson.version
-        group = "li.yunqi"
+        group = "li.yunqi.rnsecurestorage"
         description packageJson.description
         url packageJson.repository.baseUrl
 

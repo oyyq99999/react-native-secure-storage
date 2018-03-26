@@ -7,8 +7,8 @@ If you want to publish the lib as a maven dependency, follow these steps before 
 1. Be sure to have the Android [SDK](https://developer.android.com/studio/index.html) and [NDK](https://developer.android.com/ndk/guides/index.html) installed
 2. Be sure to have a `local.properties` file in this folder that points to the Android SDK and NDK
 ```
-ndk.dir=/Users/{username}/Library/Android/sdk/ndk-bundle
-sdk.dir=/Users/{username}/Library/Android/sdk
+ndk.dir=/Users/{key}/Library/Android/sdk/ndk-bundle
+sdk.dir=/Users/{key}/Library/Android/sdk
 ```
 3. Delete the `maven` folder
 4. Run `sudo ./gradlew installArchives`
