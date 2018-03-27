@@ -25,7 +25,7 @@ NSString *messageForError(NSError *error)
             return @"File already open with with write permission.";
             
         case errSecParam:
-            return @"One or more parameters passed to a function where not valid.";
+            return @"One or more parameters passed to a function were not valid.";
             
         case errSecAllocate:
             return @"Failed to allocate memory.";
@@ -72,9 +72,14 @@ void rejectWithError(RCTPromiseRejectBlock reject, NSError *error)
     return reject(codeForError(error), messageForError(error), nil);
 }
 
+bool isNotNull(NSDictionary *options, NSString *key)
+{
+    return (options && options[key] != nil && options[key] != (id)[NSNull null]);
+}
+
 CFStringRef accessibleValue(NSDictionary *options)
 {
-    if (options && options[@"accessible"] != nil) {
+    if (isNotNull(options, @"accessible")) {
         NSDictionary *keyMap = @{
                                  @"AccessibleWhenUnlocked": (__bridge NSString *)kSecAttrAccessibleWhenUnlocked,
                                  @"AccessibleAfterFirstUnlock": (__bridge NSString *)kSecAttrAccessibleAfterFirstUnlock,
@@ -94,7 +99,7 @@ CFStringRef accessibleValue(NSDictionary *options)
 
 NSString *serviceValue(NSDictionary *options)
 {
-    if (options && options[@"service"] != nil) {
+    if (isNotNull(options, @"service")) {
         return options[@"service"];
     }
     return [[NSBundle mainBundle] bundleIdentifier];
@@ -102,7 +107,7 @@ NSString *serviceValue(NSDictionary *options)
 
 NSString *accessGroupValue(NSDictionary *options)
 {
-    if (options && options[@"accessGroup"] != nil) {
+    if (isNotNull(options, @"accessGroup")) {
         return options[@"accessGroup"];
     }
     return nil;
@@ -165,7 +170,7 @@ SecAccessControlCreateFlags accessControlValue(NSDictionary *options)
     return 0;
 }
 
-RCT_EXPORT_METHOD(setItem:(NSString *)key value:(NSString *)value options: (NSDictionary *) options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(setItem:(NSString *)key value:(NSString *)value options:(NSDictionary *)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     NSString *service = serviceValue(options);
     NSDictionary *attributes = @{
