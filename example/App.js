@@ -28,8 +28,8 @@ export default class App extends Component<Props> {
       accessControl: ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
       accessible: ACCESSIBLE.WHEN_UNLOCKED,
       accessGroup: null,
-      authenticationPrompt: 'haha',
-      service: null,
+      authenticationPrompt: 'auth with yourself',
+      service: 'example',
       authenticateType: AUTHENTICATION_TYPE.BIOMETRICS,
     }
     const key = 'key'

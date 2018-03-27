@@ -2,8 +2,8 @@
 {
   "name": "react-native-secure-storage",
   "title": "React Native Secure Storage",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "A secure AsyncStorage partial implementation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,13 @@
     "baseUrl": "https://github.com/oyyq99999/react-native-secure-storage"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "react-native-component",
+    "mobile",
+    "ios",
+    "android",
+    "keychain",
+    "secure"
   ],
   "author": {
     "name": "Yunqi Ouyang",
