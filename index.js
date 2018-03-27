@@ -1,5 +1,5 @@
 
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
 const { RNSecureStorage } = NativeModules;
 
@@ -35,4 +35,69 @@ export const BIOMETRY_TYPE = {
   FINGERPRINT: 'Fingerprint',
 };
 
-export default RNSecureStorage;
+const isAndroid = Platform.OS === 'android'
+
+const defaultOptions = {
+  accessControl: null,
+  accessible: ACCESSIBLE.WHEN_UNLOCKED,
+  accessGroup: null,
+  authenticationPrompt: 'Authenticate to retrieve secret data',
+  service: null,
+  authenticateType: AUTHENTICATION_TYPE.DEVICE_PASSCODE_OR_BIOMETRICS,
+}
+
+export default {
+  getItem(key, options) {
+    const finalOptions = {
+      ...defaultOptions,
+      ...options,
+    }
+    if (isAndroid) {
+      return RNSecureStorage.getItem(key, finalOptions.service)
+    }
+    return RNSecureStorage.getItem(key, finalOptions)
+  },
+  setItem(key, value, options) {
+    const finalOptions = {
+      ...defaultOptions,
+      ...options,
+    }
+    if (isAndroid) {
+      return RNSecureStorage.setItem(key, value, finalOptions.service)
+    }
+    return RNSecureStorage.setItem(key, value, finalOptions)
+  },
+  removeItem(key, options) {
+    const finalOptions = {
+      ...defaultOptions,
+      ...options,
+    }
+    if (isAndroid) {
+      return RNSecureStorage.removeItem(key, finalOptions.service)
+    }
+    return RNSecureStorage.removeItem(key, finalOptions)
+  },
+  getAllKeys(options) {
+    const finalOptions = {
+      ...defaultOptions,
+      ...options,
+    }
+    if (isAndroid) {
+      return RNSecureStorage.getAllKeys(finalOptions.service)
+    }
+    return RNSecureStorage.getAllKeys(finalOptions)
+  },
+  getSupportedBiometryType() {
+    return RNSecureStorage.getSupportedBiometryType()
+  },
+  canCheckAuthentication(options) {
+    const finalOptions = {
+      ...defaultOptions,
+      ...options,
+    }
+    if (isAndroid) {
+      return RNSecureStorage.getSupportedBiometryType() !== null
+    }
+    return RNSecureStorage.canCheckAuthentication(options)
+  },
+}
