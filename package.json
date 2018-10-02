@@ -29,8 +29,8 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
-    "react": "16.0.0-alpha.6",
-    "react-native": "^0.44.1"
+    "react": ">=16.0.0-alpha.6",
+    "react-native": ">=0.44.1"
   },
   "devDependencies": {
     "react": "16.0.0-alpha.6",
