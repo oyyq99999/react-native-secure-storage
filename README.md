@@ -28,7 +28,7 @@ or
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import li.yunqi.RNSecureStoragePackage;` to the imports at the top of the file
+  - Add `import li.yunqi.rnsecurestorage.RNSecureStoragePackage;` to the imports at the top of the file
   - Add `new RNSecureStoragePackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
