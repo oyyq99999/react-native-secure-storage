@@ -27,8 +27,8 @@ or
 
 #### Android
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import li.yunqi.RNSecureStoragePackage;` to the imports at the top of the file
+1. Open up `android/app/src/main/java/[...]/MainApplication.java`
+  - Add `import li.yunqi.rnsecurestorage.RNSecureStoragePackage;` to the imports at the top of the file
   - Add `new RNSecureStoragePackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
@@ -37,7 +37,7 @@ or
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
-      compile project(':react-native-secure-storage')
+      implementation project(':react-native-secure-storage')
   	```
 
 
