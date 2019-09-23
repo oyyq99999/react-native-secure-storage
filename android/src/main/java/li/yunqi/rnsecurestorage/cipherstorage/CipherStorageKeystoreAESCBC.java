@@ -122,7 +122,17 @@ public class CipherStorageKeystoreAESCBC implements CipherStorage {
             outputStream.write(iv, 0, iv.length);
             // encrypt the value using a CipherOutputStream
             CipherOutputStream cipherOutputStream = new CipherOutputStream(outputStream, cipher);
-            cipherOutputStream.write(value.getBytes(charsetName));
+            byte[] bytes = value.getBytes(charsetName);
+            final int BUFFER_SIZE = 1024;
+            int offset = 0;
+            while(true) {
+                cipherOutputStream.write(bytes, offset, BUFFER_SIZE);
+                offset += BUFFER_SIZE;
+                if (offset + BUFFER_SIZE > bytes.length) { // last frame reached
+                    cipherOutputStream.write(bytes, offset, bytes.length % BUFFER_SIZE);
+                    break;
+                }
+            }
             cipherOutputStream.close();
             return outputStream.toByteArray();
         } catch (Exception e) {
