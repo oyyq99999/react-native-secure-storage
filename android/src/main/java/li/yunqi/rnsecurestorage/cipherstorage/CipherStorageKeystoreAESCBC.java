@@ -127,12 +127,14 @@ public class CipherStorageKeystoreAESCBC implements CipherStorage {
             final int BUFFER_SIZE = 1024;
             int offset = 0;
             while(true) {
-                cipherOutputStream.write(bytes, offset, BUFFER_SIZE);
-                offset += BUFFER_SIZE;
-                if (offset + BUFFER_SIZE > bytes.length) { // last frame reached
-                    cipherOutputStream.write(bytes, offset, bytes.length % BUFFER_SIZE);
+                if ((value.length() - offset) > BUFFER_SIZE) {
+                    cipherOutputStream.write(bytes, offset, BUFFER_SIZE);
+                } else {
+                    cipherOutputStream.write(bytes, offset, value.length() % BUFFER_SIZE);
                     break;
                 }
+
+                offset += BUFFER_SIZE;
             }
             cipherOutputStream.close();
             return outputStream.toByteArray();
