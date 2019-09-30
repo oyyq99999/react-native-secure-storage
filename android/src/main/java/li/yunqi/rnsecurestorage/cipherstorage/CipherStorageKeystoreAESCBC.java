@@ -4,7 +4,8 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -122,7 +123,19 @@ public class CipherStorageKeystoreAESCBC implements CipherStorage {
             outputStream.write(iv, 0, iv.length);
             // encrypt the value using a CipherOutputStream
             CipherOutputStream cipherOutputStream = new CipherOutputStream(outputStream, cipher);
-            cipherOutputStream.write(value.getBytes(charsetName));
+            byte[] bytes = value.getBytes(charsetName);
+            final int BUFFER_SIZE = 1024;
+            int offset = 0;
+            while(true) {
+                if ((value.length() - offset) > BUFFER_SIZE) {
+                    cipherOutputStream.write(bytes, offset, BUFFER_SIZE);
+                } else {
+                    cipherOutputStream.write(bytes, offset, value.length() % BUFFER_SIZE);
+                    break;
+                }
+
+                offset += BUFFER_SIZE;
+            }
             cipherOutputStream.close();
             return outputStream.toByteArray();
         } catch (Exception e) {
