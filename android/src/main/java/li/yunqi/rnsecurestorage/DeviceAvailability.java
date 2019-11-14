@@ -1,8 +1,9 @@
 package li.yunqi.rnsecurestorage;
 
 import android.content.Context;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
+
+import androidx.biometric.BiometricManager;
 
 /**
  * Created by ouyangyunqi on 2018/3/26.
@@ -12,10 +13,8 @@ class DeviceAvailability {
 
     public static boolean isFingerprintAuthAvailable(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            FingerprintManager fingerprintManager =
-                    (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
-            return fingerprintManager.isHardwareDetected() &&
-                    fingerprintManager.hasEnrolledFingerprints();
+            BiometricManager biometricManager = BiometricManager.from(context);
+            return biometricManager.canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS;
         }
         return false;
     }
