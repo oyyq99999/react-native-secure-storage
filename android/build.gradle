@@ -41,7 +41,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'com.facebook.react:react-native:+'
     implementation 'com.facebook.conceal:conceal:1.1.3@aar'
 }
