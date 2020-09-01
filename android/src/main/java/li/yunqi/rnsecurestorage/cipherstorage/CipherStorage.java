@@ -1,6 +1,6 @@
 package li.yunqi.rnsecurestorage.cipherstorage;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import li.yunqi.rnsecurestorage.exceptions.CryptoFailedException;
 
