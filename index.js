@@ -47,7 +47,7 @@ const defaultOptions = {
 }
 
 export default {
-  getItem(key, options) {
+  getItem(key, options = {}) {
     const finalOptions = {
       ...defaultOptions,
       ...options,
@@ -57,7 +57,7 @@ export default {
     }
     return RNSecureStorage.getItem(key, finalOptions)
   },
-  setItem(key, value, options) {
+  setItem(key, value, options = {}) {
     const finalOptions = {
       ...defaultOptions,
       ...options,
@@ -67,7 +67,7 @@ export default {
     }
     return RNSecureStorage.setItem(key, value, finalOptions)
   },
-  removeItem(key, options) {
+  removeItem(key, options = {}) {
     const finalOptions = {
       ...defaultOptions,
       ...options,
@@ -77,7 +77,7 @@ export default {
     }
     return RNSecureStorage.removeItem(key, finalOptions)
   },
-  getAllKeys(options) {
+  getAllKeys(options = {}) {
     const finalOptions = {
       ...defaultOptions,
       ...options,
@@ -90,7 +90,7 @@ export default {
   getSupportedBiometryType() {
     return RNSecureStorage.getSupportedBiometryType()
   },
-  canCheckAuthentication(options) {
+  canCheckAuthentication(options = {}) {
     const finalOptions = {
       ...defaultOptions,
       ...options,
