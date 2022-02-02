@@ -12,7 +12,7 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 26
@@ -106,11 +106,9 @@ afterEvaluate { project ->
 
     task installArchives(type: Upload) {
         configuration = configurations.archives
-        repositories.mavenDeployer {
+        repositories.maven {
             // Deploy to react-native-event-bridge/maven, ready to publish to npm
-            repository url: "file://${projectDir}/../android/maven"
-
-            configureReactNativePom pom
+            url = "file://${projectDir}/../android/maven"
         }
     }
 }
