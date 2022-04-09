@@ -2086,8 +2086,8 @@ mkdirp@^0.5.1:
     minimist "0.0.8"
 
 moment@2.x.x:
-  version "2.21.0"
-  resolved "http://registry.npm.taobao.org/moment/download/moment-2.21.0.tgz#2a114b51d2a6ec9e6d83cf803f838a878d8a023a"
+  version "2.29.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
 
 morgan@~1.6.1:
   version "1.6.1"
